@@ -1,10 +1,15 @@
 import "package:flutter/material.dart";
 import "package:image_picker/image_picker.dart";
+import "package:instagram/screen/login_screen.dart";
 import "package:instagram/utils/colors.dart";
 import "package:instagram/utils/utils.dart";
 import "package:instagram/widgets/textfield.dart";
 import 'package:instagram/resources/auth_methods.dart';
 import 'dart:typed_data';
+
+import "../responsive/mobile_screen_layout.dart";
+import "../responsive/responsive_layout_screen.dart";
+import "../responsive/web_screen_layout.dart";
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -47,12 +52,22 @@ class _SignupState extends State<Signup> {
         bio: _bioController.text,
         file: _image!);
     if (res == "success") {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+                webScreenLayout: WebScreenLayout(),
+                mobileScreenLayout: MobileScreenlayout(),
+              )));
     } else {
       showSnackbar(res, context);
     }
     setState(() {
       _isLoading = false;
     });
+  }
+
+  void navigateToLogin() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
   @override
@@ -160,7 +175,7 @@ class _SignupState extends State<Signup> {
                     padding: EdgeInsets.symmetric(vertical: 8),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: navigateToLogin,
                     child: Container(
                       child: Text(
                         "Log in",
