@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/utils/colors.dart';
+import 'package:instagram/utils/global_variable.dart';
 
 class MobileScreenlayout extends StatefulWidget {
   const MobileScreenlayout({super.key});
@@ -55,13 +56,7 @@ class _MobileScreenlayoutState extends State<MobileScreenlayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        children: [
-          Text("feed"),
-          Text("search"),
-          Text("add post"),
-          Text("notification"),
-          Text("profile")
-        ],
+        children: HomeScreenitem,
         physics: NeverScrollableScrollPhysics(),
         controller: pageController,
         onPageChanged: onPageChanged,
