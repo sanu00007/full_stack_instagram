@@ -17,7 +17,7 @@ class PostCard extends StatelessWidget {
             child: Row(
               children: [
                 CircleAvatar(
-                  radius: 16,
+                  radius: 17,
                   backgroundImage: AssetImage("assets/image2.webp"),
                 ),
                 Expanded(
@@ -105,6 +105,59 @@ class PostCard extends StatelessWidget {
               ))
             ],
           ),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DefaultTextStyle(
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle2!
+                      .copyWith(fontWeight: FontWeight.w800),
+                  child: Text(
+                    "1.1M Likes",
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.only(
+                    top: 8,
+                  ),
+                  child: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(color: primaryColor),
+                      children: [
+                        TextSpan(
+                          text: 'username',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '  Hey this is cristiano ronaldo',
+                          // style: TextStyle(
+                          //   fontWeight: FontWeight.bold,
+                          // ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Text(
+                    "View all 11.3k comments",
+                    style: const TextStyle(fontSize: 15, color: secondaryColor),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
