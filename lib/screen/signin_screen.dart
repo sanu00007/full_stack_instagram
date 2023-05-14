@@ -82,13 +82,13 @@ class _SignupState extends State<Signup> {
             children: [
               Flexible(child: Container(), flex: 2),
               Image.asset(
-                "assets/image.png",
-                color: primaryColor,
-                height: 64,
+                "assets/image.jpg",
+                // color: primaryColor,
+                height: 180,
               ),
-              const SizedBox(
-                height: 64,
-              ),
+              // const SizedBox(
+              //   height: 14,
+              // ),
               Stack(
                 children: [
                   _image != null
