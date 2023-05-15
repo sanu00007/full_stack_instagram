@@ -1,8 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/utils/colors.dart';
+import 'dart:math';
+
+int getRandomInt(int max) {
+  var random = Random();
+  return random.nextInt(max);
+}
+
+AssetImage _getBackgroundImage() {
+  switch (getRandomInt(5)) {
+    case 0:
+      return AssetImage('assets/image11.jpeg');
+    case 1:
+      return AssetImage('assets/image12.jpeg');
+    case 2:
+      return AssetImage('assets/image13.jpeg');
+    case 3:
+      return AssetImage('assets/image14.jpeg');
+    case 4:
+      return AssetImage('assets/image15.jpeg');
+    default:
+      return AssetImage('assets/image10.jpeg');
+  }
+}
+
+List<String> imagePaths = [
+  "assets/image6.jpg",
+  "assets/image21.jpeg",
+  "assets/image22.jpeg",
+  "assets/image23.jpeg",
+  "assets/image24.jpeg",
+  "assets/image25.jpeg",
+  "assets/image26.jpeg",
+  "assets/image27.jpeg",
+  "assets/image28.jpeg",
+  "assets/image10.jpeg",
+  "assets/image29.jpeg",
+  // Add more image paths as needed
+];
+
+String getRandomImagePath() {
+  var random = Random();
+  var randomIndex = random.nextInt(imagePaths.length);
+  return imagePaths[randomIndex];
+}
 
 class PostCard extends StatelessWidget {
-  const PostCard({super.key});
+  final snap;
+
+  const PostCard({
+    Key? key,
+    required this.snap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +66,8 @@ class PostCard extends StatelessWidget {
             child: Row(
               children: [
                 CircleAvatar(
-                  radius: 17,
-                  backgroundImage: AssetImage("assets/image2.webp"),
+                  radius: 18,
+                  backgroundImage: _getBackgroundImage(),
                 ),
                 Expanded(
                   child: Padding(
@@ -28,7 +77,7 @@ class PostCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'username',
+                          snap['username'].toString(),
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -70,8 +119,9 @@ class PostCard extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.35,
             width: double.infinity,
+            // child: Image.network(snap['photourl'].toString()),
             child: Image.asset(
-              "assets/image6.jpg",
+              getRandomImagePath(),
               fit: BoxFit.cover,
             ),
           ),
@@ -119,7 +169,8 @@ class PostCard extends StatelessWidget {
                       .subtitle2!
                       .copyWith(fontWeight: FontWeight.w800),
                   child: Text(
-                    "1.1M Likes",
+                    " ",
+                    // '${snap['likes'].length} likes',
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),
@@ -133,13 +184,13 @@ class PostCard extends StatelessWidget {
                       style: const TextStyle(color: primaryColor),
                       children: [
                         TextSpan(
-                          text: 'username',
+                          text: snap['username'].toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         TextSpan(
-                          text: '  Hey this is cristiano ronaldo',
+                          text: '  ${snap['description']}',
                           // style: TextStyle(
                           //   fontWeight: FontWeight.bold,
                           // ),
@@ -148,13 +199,24 @@ class PostCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Text(
+                      "View all 11.3k comments",
+                      style:
+                          const TextStyle(fontSize: 15, color: secondaryColor),
+                    ),
+                  ),
+                ),
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  padding: const EdgeInsets.symmetric(vertical: 2),
                   child: Text(
-                    "View all 11.3k comments",
+                    "17/05/2023",
                     style: const TextStyle(fontSize: 15, color: secondaryColor),
                   ),
-                )
+                ),
               ],
             ),
           )
