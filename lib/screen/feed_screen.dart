@@ -36,6 +36,7 @@ class FeedScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
+
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) => PostCard(
