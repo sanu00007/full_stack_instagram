@@ -163,9 +163,9 @@ class _SignupState extends State<Signup> {
                       color: blueColor),
                 ),
               ),
-              SizedBox(
-                height: 24,
-              ),
+              // SizedBox(
+              //   height: 24,
+              // ),
               Flexible(child: Container(), flex: 2),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

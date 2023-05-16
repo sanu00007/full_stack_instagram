@@ -63,7 +63,8 @@ List<String> imagePaths = [
   "assets/image40.jpeg",
   "assets/image29.jpeg",
   "assets/image39.jpeg",
-  "assets/image38.jpeg", "assets/image35.jpeg", "assets/image34.jpeg",
+  "assets/image38.jpeg",
+  "assets/image34.jpeg",
   // Add more image paths as needed
 ];
 
