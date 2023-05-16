@@ -19,10 +19,13 @@ List<String> imagePaths = [
   "assets/image30.jpeg",
   "assets/image31.jpeg",
   "assets/image32.jpeg",
-  "assets/image33.jpeg", "assets/image37.jpeg", "assets/image40.jpeg",
-  "assets/image34.jpeg", "assets/image38.jpeg", "assets/image39.jpeg",
+  "assets/image33.jpeg",
+  "assets/image37.jpeg",
+  "assets/image40.jpeg",
+  "assets/image34.jpeg",
+  "assets/image38.jpeg",
+  "assets/image39.jpeg",
   "assets/image24.jpeg",
-  // Add more image paths as needed
 ];
 
 String getRandomImagePath() {
@@ -43,7 +46,6 @@ class _SearchSCreenState extends State<SearchSCreen> {
   bool isShowUsers = false;
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     searchController.dispose();
   }
