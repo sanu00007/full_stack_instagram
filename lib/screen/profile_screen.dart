@@ -2,16 +2,58 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/responsive/firestore_method.dart';
+import 'package:instagram/screen/comment_screen.dart';
 import 'package:instagram/screen/login_screen.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/utils/utils.dart';
-
+import 'package:flutter/widgets.dart';
 import '../resources/auth_methods.dart';
 import '../widgets/follow_button.dart';
+import 'dart:math';
+import 'package:flutter/widgets.dart';
+
+int generateRandomNumber() {
+  final random = Random().nextInt(9);
+  return random;
+}
+
+List<String> imagePaths = [
+  "assets/image6.jpg",
+  "assets/image21.jpeg",
+  "assets/image22.jpeg",
+  "assets/image23.jpeg",
+  "assets/image24.jpeg",
+  "assets/image25.jpeg",
+  "assets/image26.jpeg",
+  "assets/image27.jpeg",
+  "assets/image28.jpeg",
+  "assets/image10.jpeg",
+  "assets/image29.jpeg",
+  "assets/image30.jpeg",
+  "assets/image31.jpeg",
+  "assets/image32.jpeg",
+  "assets/image33.jpeg",
+  "assets/image37.jpeg",
+  "assets/image40.jpeg",
+  "assets/image34.jpeg",
+  "assets/image38.jpeg",
+  "assets/image39.jpeg",
+  "assets/image24.jpeg",
+];
+
+String getRandomImagePath() {
+  var random = Random();
+  var randomIndex = random.nextInt(imagePaths.length);
+  return imagePaths[randomIndex];
+}
 
 class ProfileScreen extends StatefulWidget {
   final String uid;
-  const ProfileScreen({Key? key, required this.uid}) : super(key: key);
+
+  const ProfileScreen({
+    Key? key,
+    required this.uid,
+  }) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -19,11 +61,12 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   var userData = {};
-  int postLen = 0;
+  int postLen = generateRandomNumber();
   int followers = 0;
   int following = 0;
   bool isFollowing = false;
   bool isLoading = false;
+  int postlen = 0;
   @override
   void initSate() {
     super.initState();
@@ -48,6 +91,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       followers = userSnap.data()!['followers'].length;
       following = userSnap.data()!['following'].length;
       userData = userSnap.data()!;
+      postlen = userData['post'];
+      print(postlen);
       isFollowing = userSnap
           .data()!['followers']
           .contains(FirebaseAuth.instance.currentUser!.uid);
@@ -72,7 +117,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         : Scaffold(
             appBar: AppBar(
               backgroundColor: mobileBackgroundColor,
-              title: Text(userData['username'].toString()),
+              title: Text('username'),
               centerTitle: false,
             ),
             body: ListView(
@@ -85,8 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           CircleAvatar(
                             backgroundColor: Colors.grey,
-                            backgroundImage:
-                                NetworkImage(userData['photourl'].toString()),
+                            backgroundImage: AssetImage(getRandomImagePath()),
                             radius: 40,
                           ),
                           Expanded(
@@ -99,8 +143,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     buildStatColumn(postLen, "posts"),
-                                    buildStatColumn(followers, "followers"),
-                                    buildStatColumn(following, "following"),
+                                    buildStatColumn(
+                                        generateRandomNumber(), "followers"),
+                                    buildStatColumn(
+                                        generateRandomNumber(), "following"),
                                   ],
                                 ),
                                 Row(
@@ -173,7 +219,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         alignment: Alignment.centerLeft,
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          userData['username'].toString(),
+                          'username',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -181,7 +227,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         alignment: Alignment.centerLeft,
                         padding: const EdgeInsets.only(top: 1.5),
                         child: Text(
-                          userData['bio'].toString(),
+                          'Bio',
                         ),
                       ),
                     ],
@@ -201,7 +247,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     }
                     return GridView.builder(
                       shrinkWrap: true,
-                      itemCount: (snapshot.data! as dynamic).docs.length,
+                      itemCount: postLen,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
@@ -209,16 +255,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisSpacing: 1.5,
                         childAspectRatio: 1,
                       ),
-                      itemBuilder: (context, index) {
-                        DocumentSnapshot snap =
-                            (snapshot.data! as dynamic).docs[index];
-                        return Container(
-                          child: Image(
-                            image: NetworkImage(snap['posturl']),
-                            fit: BoxFit.cover,
-                          ),
-                        );
-                      },
+
+                      itemBuilder: (BuildContext context, int index) =>
+                          Image.asset(
+                        getRandomImagePath(),
+                        fit: BoxFit.cover,
+                      ),
+                      // itemBuilder: (context, index) {
+                      //   DocumentSnapshot snap =
+                      //       (snapshot.data! as dynamic).docs[index];
+                      //   return Container(
+                      //     child: Image(
+                      //       image: AssetImage('assets/image30.jpeg'),
+                      //       fit: BoxFit.cover,
+                      //     ),
+                      //   );
+                      // },
                     );
                   },
                 ),
