@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram/responsive/firestore_method.dart';
 import 'package:instagram/screen/comment_screen.dart';
 import 'package:instagram/utils/colors.dart';
+import 'package:instagram/utils/dimension.dart';
 import 'package:instagram/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
@@ -110,7 +111,13 @@ class _PostCardState extends State<PostCard> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Container(
+      // decoration: BoxDecoration(
+      //     border: Border.all(
+      //         color: width > webScreenSize
+      //             ? secondaryColor
+      //             : mobileBackgroundColor)),
       color: mobileBackgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(

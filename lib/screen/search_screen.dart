@@ -5,6 +5,8 @@ import 'package:instagram/screen/profile_screen.dart';
 import 'package:instagram/utils/colors.dart';
 import 'dart:math';
 
+import 'package:instagram/utils/dimension.dart';
+
 List<String> imagePaths = [
   "assets/image6.jpg",
   "assets/image21.jpeg",
@@ -119,9 +121,16 @@ class _SearchSCreenState extends State<SearchSCreen> {
                   itemCount: imagePaths.length,
                   itemBuilder: (BuildContext context, int index) => Image.asset(
                     getRandomImagePath(),
+                    fit: BoxFit.cover,
                   ),
-                  staggeredTileBuilder: (index) => StaggeredTile.count(
-                      (index % 7) == 0 ? 2 : 1, (index % 7 == 0) ? 2 : 1),
+                  staggeredTileBuilder: (index) => MediaQuery.of(context)
+                              .size
+                              .width >
+                          webScreenSize
+                      ? StaggeredTile.count(
+                          (index % 7) == 0 ? 1 : 1, (index % 7 == 0) ? 1 : 1)
+                      : StaggeredTile.count(
+                          (index % 7) == 0 ? 2 : 1, (index % 7 == 0) ? 2 : 1),
                   mainAxisSpacing: 8.0,
                   crossAxisSpacing: 8.0,
                 );
