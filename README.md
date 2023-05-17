@@ -21,6 +21,9 @@ Follow/Unfollow: Users can follow or unfollow other users to see their posts in 
 **Technologies Used**
 
 Flutter: A cross-platform framework for building mobile applications.
+
 Firebase Authentication: Handles user authentication and authorization.
+
 Cloud Firestore: A NoSQL document database provided by Firebase for storing and querying user data, posts, and user interactions.
+
 Firebase Storage: Provides cloud storage for user profile pictures and post images.
